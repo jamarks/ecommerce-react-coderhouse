@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
+import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import Footer from './components/footer/footer'
 import './App.css';
+import NavBar from './components/navBar/NavBar';
+import Home from './components/home/home';
+import ItemDetailContainer from './components/itemDetailContainer/itemDetailContainer';
+import ItemListCointainer from './components/itemListContainer/itemListContainer';
+import Cart from './components/cart/cart';
 
-function App() {
+import {CartProvider} from './context/cartContext'
+
+const categories = [{name:'Remeras',id: 'remeras'},{name:'Camisas',id: 'camisas'}]
+
+const App = () => {
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        <CartProvider>
+          <BrowserRouter>
+          <NavBar categories={categories}/>
+            <Switch>
+                <Route exact path='/'>
+                  <Home>Javier</Home>      
+                </Route>
+                <Route path='/item/:id'>
+                  <ItemDetailContainer/>
+                </Route>
+                <Route path='/items'>
+                  <ItemListCointainer/>
+                </Route>
+                <Route path='/cart'>
+                  <Cart></Cart>
+                </Route>
+
+            </Switch>
+          <Footer/>
+          </BrowserRouter>
+        </CartProvider>
+        //https://stackblitz.com/edit/coderhouse-react-context-regular
+  
+  )
 }
+
 
 export default App;
