@@ -20,7 +20,7 @@ function getItem(searchId) {
 
     
     return new Promise((res,rej)=>{
-        setTimeout(() => res(productoSeleccionado), 100);
+        setTimeout(() => res(productoSeleccionado), 500);
     });
     // eventualmente se reemplazara por firebase
 
@@ -57,7 +57,12 @@ function ItemDetailContainer() {
                </div>
            ):(
                     <>
-                        <Link to ={'/items'}> Volver al listado </Link>
+                        <div className='row'>
+                            <div className='col'>
+                                <Link to ={'/items'}> Volver al listado </Link>
+                                </div>
+                        </div>
+                        
                         <ItemDetail product={product}></ItemDetail>
                     </>
                 

@@ -46,7 +46,7 @@ function ItemListCointainer(props) {
                </div>
            ):(
                 <>
-                    <h2>Remeras</h2>
+                    <h2 className="display-4">Remeras</h2>
                     <ItemList products={products}></ItemList>
                 </>
            )} 

@@ -28,29 +28,30 @@ const ItemDetail = (product) => {
         }
 
          return (
-            <div className='container'>
+            
                 <div className="row">
-                    <div className="col">
-                        <h1>{product.name}</h1>
+                    <div className="col-md-7">
+                    <h1 className="display-4">{product.name}</h1>
                         Precio: $<span className='price'>{product.price}</span><br/>
                         <div className='row'>
-                            <div className='col-3'>
+                            <div className='col col-xs-6 col-md-3'>
                                 <ItemCount options={options} onChange={onItemCountChange}></ItemCount>
                             </div>
-                            <div className='col-4'>
-                            <button onClick={()=> addItem({product,count})} type="button" className="btn btn-primary">Comprar ({count} u) </button>
+
+                            <div className='col col-xs-6 col-md-4'>
+                                <button onClick={()=> addItem({product,count})} type="button" className="btn btn-primary">Comprar ({count} u) </button>
                             </div>
                         </div>
+
                         <br/><br/>
                         <b>Sobre {product.name}</b>
                         <br/>
                         <p className='description'>{product.description}</p>
                     </div>
-                    <div className="col-6">
-                        <img src={product.img} width='100%'></img>
+                    <div className="col col-md-5">
+                        <img src={product.img} className='img-fluid'></img>
                     </div>
                 </div>
-            </div>
         )
 
 }

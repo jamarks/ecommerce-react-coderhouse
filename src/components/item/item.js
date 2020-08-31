@@ -13,10 +13,10 @@ const Item = (product) => {
 
          return (
 
-                <div className='col-3 product'>
-                    <h3>{product.name}</h3>
+                <div className='col col-md-3 product'>
+                    <h4>{product.name}</h4>
                     <Link to ={'/item/' + product.id}>
-                                <img src={product.img} width='100%'></img>
+                                <img src={product.img} className='img-fluid'></img>
                     </Link>
                     <p className='description'>{product.description}</p>
                     Precio: $<span className='price'>{product.price}</span><br/>

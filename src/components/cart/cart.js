@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useCartContext} from '../../context/cartContext'
 
 export default ()=>{
-    const {cart, cleanCart, cartLenght} = useCartContext();
+    const {cart, cleanCart, cartCount} = useCartContext();
     console.log(cart);
 
     
@@ -14,7 +14,7 @@ export default ()=>{
                 <div className='col'>
                     <h2>Tu carro de compras</h2>                    
                     {
-                    cartLenght > 0 && 
+                    cartCount > 0 && 
                         <small><span Style='cursor: pointer;' onClick={()=>cleanCart()}>Limpiar Carrito</span></small>
                     }
                     <br/><br/>
