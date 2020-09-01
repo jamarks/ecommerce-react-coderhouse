@@ -13,7 +13,7 @@ const Item = (product) => {
 
          return (
 
-                <div className='col col-md-3 product'>
+                <div className='col col-12 col-md-3 product'>
                     <h4>{product.name}</h4>
                     <Link to ={'/item/' + product.id}>
                                 <img src={product.img} className='img-fluid'></img>

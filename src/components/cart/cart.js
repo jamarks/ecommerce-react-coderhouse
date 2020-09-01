@@ -3,7 +3,7 @@ import {useCartContext} from '../../context/cartContext'
 
 export default ()=>{
     const {cart, cleanCart, cartCount} = useCartContext();
-    console.log(cart);
+    //console.log(cart);
 
     
     
