@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom'
 import Footer from './components/footer/footer'
 import './App.css';
 import NavBar from './components/navBar/NavBar';
@@ -10,7 +10,7 @@ import Cart from './components/cart/cart';
 
 import {CartProvider} from './context/cartContext'
 
-const categories = [{name:'Remeras',id: 'remeras'},{name:'Camisas',id: 'camisas'}]
+const categories = [{name:'Remeras',id: 'remeras'},{name:'Pantalones',id: 'pantalones'}]
 
 const App = () => {
 
@@ -21,14 +21,18 @@ const App = () => {
           <NavBar categories={categories}/>
             <Switch>
                 <Route exact path='/'>
-                  <Home>Javier</Home>      
+                  <Home/>
                 </Route>
                 <Route path='/item/:id'>
                   <ItemDetailContainer/>
                 </Route>
-                <Route path='/items'>
+                <Route path='/items/:categoryId'>
                   <ItemListCointainer/>
                 </Route>
+                <Route path='/items/'>
+                  <Redirect to="/" />
+                </Route>
+                
                 <Route path='/cart'>
                   <Cart></Cart>
                 </Route>

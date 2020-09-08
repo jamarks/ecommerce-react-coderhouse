@@ -9,7 +9,6 @@ function Home(props) {
             <>
             <div className='container' style={{paddingTop:20}}>
                 <JumboTron/>    
-                Home. Hola {props.children} 
             </div>
             
             <ItemListCointainer/>

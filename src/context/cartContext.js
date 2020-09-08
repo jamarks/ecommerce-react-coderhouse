@@ -6,11 +6,9 @@ export const useCartContext = () => useContext(CartContext);
 export function CartProvider({defaultValue = [], children}){
 
     const [cart, setCart] = useState(defaultValue);
-    const [cartCount, setCartCount] = useState();
     
     useEffect(() => {
         //console.log('Montaje de CartProvider');
-        setCartCount(0);
 
         return () => {
             
@@ -29,11 +27,9 @@ export function CartProvider({defaultValue = [], children}){
     function addItem(item){
         // fijarse si existe, solo sumarle al quantity
         const temp = [...cart, item];
-        //console.log(cartCount);
-        setCartCount(cartCount+item.count);
-        //console.log(cartCount);
+        //cart.map()
         setCart(temp);
-        console.log(temp);
+        //console.log(temp);
         
     }
 
@@ -53,15 +49,14 @@ export function CartProvider({defaultValue = [], children}){
     }
 
     function cartLenght(){
-        // porque no funciona esto??!
         let cantidad = 0;
         cart.map(i=>{
-            //console.log(i.count);
             cantidad = cantidad + i.count;
 
         })
-        console.log(cart.length);
-       // return( cart.length)
+     
+    //   console.log(cantidad);
+        return(cantidad)
 
     }
 
@@ -71,7 +66,7 @@ export function CartProvider({defaultValue = [], children}){
     }   
 
     return (
-            <CartContext.Provider value={{cart,cartCount, addItem, cartLenght, cleanCart}}>
+            <CartContext.Provider value={{cart, addItem, cartLenght, cleanCart}}>
                 {children}
             </CartContext.Provider>
         )

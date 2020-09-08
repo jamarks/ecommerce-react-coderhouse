@@ -8,30 +8,22 @@ const ItemDetail = (product) => {
         
         const [count,setCount] = useState(1)
         const {addItem} = useCartContext();
-
-        useEffect(()=>{
-            //console.log('Montaje');
-            return ()=>{
-              //  console.log('Desmontaje');
-            }
-        },[]);
-    
-        product = product.product // 
-        //console.log(product);
-        
-        const options = [{
-                min: 1, 
-                max: product.stock}]
+        product = product.product
+        console.log('itemDetail')
+        console.log(product);
+        //console.log(product.product)
+        //console.log(product.product.description)
+        const options = [{min: 1, max: product.stock}]
         
         function onItemCountChange(value){
             setCount(value);        
         }
 
          return (
-            
+                
                 <div className="row">
                     <div className="col-md-7">
-                    <h1 className="display-4">{product.name}</h1>
+                    <h1 className="display-4">{product.title}</h1>
                         Precio: $<span className='price'>{product.price}</span><br/>
                         <div className='row'>
                             <div className='col col-xs-6 col-md-3'>
@@ -49,11 +41,10 @@ const ItemDetail = (product) => {
                         <p className='description'>{product.description}</p>
                     </div>
                     <div className="col col-md-5">
-                        <img src={product.img} className='img-fluid'></img>
+                        <img src={product.imageId} className='img-fluid'></img>
                     </div>
                 </div>
         )
-
 }
 
 
