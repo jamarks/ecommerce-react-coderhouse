@@ -1,6 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import {getFirestore} from '../../firebase'
-
+import {Link} from 'react-router-dom'
 function Menu(props){
 
     //useEffect(() => {
@@ -33,7 +33,7 @@ function Menu(props){
                 Categorias
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {props.categories.map(cat=><a key={cat.name} className="dropdown-item" href={'/items/' + cat.id}>{cat.name}</a>)}
+                    {props.categories.map(cat=><Link className="dropdown-item" to={'/items/' + cat.id} key={cat.id}>{cat.name}</Link>)}
                 </div>
             </li>
             </ul>

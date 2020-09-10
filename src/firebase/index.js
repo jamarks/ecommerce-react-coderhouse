@@ -13,7 +13,7 @@ const app = firebase.initializeApp({
   });
 
 
-  export function getFirease(){
+  export function getFirebase(){
       return app;
   }
 

@@ -6,6 +6,13 @@ export const useCartContext = () => useContext(CartContext);
 export function CartProvider({defaultValue = [], children}){
 
     const [cart, setCart] = useState(defaultValue);
+
+    // TODO
+    // Validar q si es el mismo item, agregarla cantidad y no un nuevo item en productos
+    // Deberiamos ir teniendo el total actualizado cuando se agrega o se quita?
+    // poder quitar por id.
+    // usar un reduce para sumar el total
+        //return cart.reduce((prev, next) =>     (prev + (next.quantity * next.item.price)), 0)
     
     useEffect(() => {
         //console.log('Montaje de CartProvider');
