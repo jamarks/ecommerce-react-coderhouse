@@ -29,18 +29,38 @@ export function CartProvider({defaultValue = [], children}){
         }
     })
 
-    
+
 
     function addItem(item){
         // fijarse si existe, solo sumarle al quantity
-        const temp = [...cart, item];
-        //cart.map()
-        setCart(temp);
+        if(!isInCart(item.product.id)){
+            console.log('no existe')
+            const temp = [...cart, item];
+            setCart(temp);
+        }
+        else{
+            // aca hay q sumar
+            let cartTemporal = cart
+            console.log(cartTemporal)
+
+            for (var i in cartTemporal) {
+                console.log(cartTemporal[i].product.id)
+                console.log(item.product.id)
+                if (cartTemporal[i].product.id ===  item.product.id) {
+                    cartTemporal[i].count = cartTemporal[i].count + item.count;
+                   break; 
+                }
+              }
+            setCart(cartTemporal)
+            console.log('existe')
+
+        }
         //console.log(temp);
         
     }
 
     function removeItem(item){
+        // no implementado
         console.log('remove item ' + item);
     }
 
@@ -48,8 +68,8 @@ export function CartProvider({defaultValue = [], children}){
         return cart.find(obj=>obj.product.id === id)
     }
 
-    function isInCart(itemId){
-        return itemId === undefined ? undefined : getFromCart() !== undefined
+    function isInCart(itemId){        
+        return itemId === undefined ? undefined : getFromCart(itemId) !== undefined
 
         //console.log('is item in cart ' + item);
 
@@ -59,21 +79,27 @@ export function CartProvider({defaultValue = [], children}){
         let cantidad = 0;
         cart.map(i=>{
             cantidad = cantidad + i.count;
-
         })
-     
-    //   console.log(cantidad);
+
         return(cantidad)
 
     }
 
+    function getTotal(){
+        let total = 0;
+        console.log('getTotal')
+        cart.map(i=>{
+            total = total + (i.count*i.product.price);
+        })
+        return(Number((total).toFixed(2)))
+
+    }
     function cleanCart(){
-        setCart([]);
-        //console.log('limpio')
+        setCart([]);    
     }   
 
     return (
-            <CartContext.Provider value={{cart, addItem, cartLenght, cleanCart}}>
+            <CartContext.Provider value={{cart, addItem, cartLenght, cleanCart, getTotal}}>
                 {children}
             </CartContext.Provider>
         )

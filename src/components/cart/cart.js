@@ -9,7 +9,7 @@ import {getFirestore} from '../../firebase'
 import {Link} from 'react-router-dom'
 
 export default ()=>{
-    const {cart, cleanCart, cartLenght} = useCartContext();
+    const {cart, cleanCart, cartLenght,getTotal} = useCartContext();
     const [userOrderId, setUserOrderId] = useState(null);
     //console.log(cart);
 
@@ -75,14 +75,21 @@ export default ()=>{
                 <div className='row cartList'>
                     <ul>
                     {   
-                    cart.map(i => <li key={i.product.id}> <img src={i.product.imageId}></img> {i.product.title} | Cantidad: {i.count} </li>)
+                    cart.map(i => 
+                        <div key={i.product.id}> 
+                            <img src={i.product.imageId}></img> 
+                            {i.product.title} | Cantidad: {i.count} | $ unitario: ${i.product.price} 
+                        </div>)
                     }
                     </ul>
                 </div>
                 <div className='row'>
-                    Total: XXXX
+                    Total: ${getTotal()}
+                </div>
+                <div className='row'>
                     <button onClick={()=> createOrder()} type="button" className="btn btn-primary"> Comprar </button>
                 </div>
+                
                 {userOrderId  && <>
                     <div className='row'>
                         Order Creada: # {userOrderId}

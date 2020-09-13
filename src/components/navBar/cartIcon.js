@@ -5,7 +5,7 @@ import {useCartContext} from '../../context/cartContext';
 const Cart = (props) => {
     
     
-    const {cartCount, cartLenght} = useCartContext();
+    const {cartLenght} = useCartContext();
 
     function cartClick() {
     }

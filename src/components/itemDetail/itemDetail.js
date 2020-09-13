@@ -9,8 +9,8 @@ const ItemDetail = (product) => {
         const [count,setCount] = useState(1)
         const {addItem} = useCartContext();
         product = product.product
-        console.log('itemDetail')
-        console.log(product);
+        //console.log('itemDetail')
+        //console.log(product);
         //console.log(product.product)
         //console.log(product.product.description)
         const options = [{min: 1, max: product.stock}]
