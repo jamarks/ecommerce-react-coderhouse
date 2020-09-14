@@ -23,4 +23,23 @@ h2{color:#111;}
 .white {color:white}
 .capitalize {text-transform: capitalize;}
 .pointer{cursor:pointer}
-.cartList img {width:50px;}
+.flexContainer{}
+.flexRow{}
+
+.marginTop{margin-top:45px;}
+.marginTopSmall{margin-top:15px;}
+.noMarginNoPadding{margin:0;padding:0}
+.lotties{display: grid;grid-template-columns: auto auto;}
+
+.form-control+.form-control {
+  margin-top: .5rem;
+}
+
+.list-group-item.no-padding{}
+
+@media only screen and (min-device-width : 320px) and (max-device-width: 480px){
+  .lotties{
+    display: grid;
+    grid-template-columns: auto;
+  }
+}

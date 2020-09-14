@@ -6,7 +6,7 @@ import {useCartContext} from '../../context/cartContext';
 const ItemDetail = (product) => {
 
         
-        const [count,setCount] = useState(1)
+        const [count,setCount] = useState();
         const {addItem} = useCartContext();
         product = product.product
         //console.log('itemDetail')
@@ -31,7 +31,7 @@ const ItemDetail = (product) => {
                             </div>
 
                             <div className='col col-xs-6 col-md-4'>
-                                <button onClick={()=> addItem({product,count})} type="button" className="btn btn-primary">Comprar ({count} u) </button>
+                                <button onClick={()=> addItem({product,count})} type="button" className="btn btn-primary">Comprar <span className="badge badge-light">{count}</span></button>
                             </div>
                         </div>
 

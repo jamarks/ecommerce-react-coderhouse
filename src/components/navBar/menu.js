@@ -33,7 +33,7 @@ function Menu(props){
                 Categorias
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    {props.categories.map(cat=><Link className="dropdown-item" to={'/items/' + cat.id} key={cat.id}>{cat.name}</Link>)}
+                    {props.categories.map(cat=><Link className="dropdown-item" to={'/categories/' + cat.id} key={cat.id}>{cat.name}</Link>)}
                 </div>
             </li>
             </ul>

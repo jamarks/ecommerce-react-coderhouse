@@ -6,6 +6,10 @@ export const useCartContext = () => useContext(CartContext);
 export function CartProvider({defaultValue = [], children}){
 
     const [cart, setCart] = useState(defaultValue);
+    
+    // el total de items no actualiza cuando inserto un producto que ya existe. Es raro.
+    const [amountItems,setAmountItems] = useState();
+
 
     // TODO
     // Validar q si es el mismo item, agregarla cantidad y no un nuevo item en productos
@@ -16,7 +20,7 @@ export function CartProvider({defaultValue = [], children}){
     
     useEffect(() => {
         //console.log('Montaje de CartProvider');
-
+        setAmountItems(0)
         return () => {
             
         }
@@ -34,34 +38,38 @@ export function CartProvider({defaultValue = [], children}){
     function addItem(item){
         // fijarse si existe, solo sumarle al quantity
         if(!isInCart(item.product.id)){
-            console.log('no existe')
+            //console.log('no existe')
             const temp = [...cart, item];
             setCart(temp);
         }
         else{
             // aca hay q sumar
             let cartTemporal = cart
-            console.log(cartTemporal)
 
             for (var i in cartTemporal) {
-                console.log(cartTemporal[i].product.id)
-                console.log(item.product.id)
                 if (cartTemporal[i].product.id ===  item.product.id) {
                     cartTemporal[i].count = cartTemporal[i].count + item.count;
                    break; 
                 }
               }
-            setCart(cartTemporal)
-            console.log('existe')
-
+            setCart(cartTemporal);            
         }
-        //console.log(temp);
-        
+        cartLenght()
     }
 
-    function removeItem(item){
-        // no implementado
-        console.log('remove item ' + item);
+    function removeItem(itemId){
+        let cartTemporal = cart
+        
+        for (var i in cartTemporal) {
+            if (cartTemporal[i].product.id ===  itemId) {
+                cartTemporal.splice(i,i+1);
+               break; 
+            }
+        }
+
+        setCart(cartTemporal);     
+        cartLenght();
+
     }
 
     function getFromCart(id){
@@ -70,7 +78,6 @@ export function CartProvider({defaultValue = [], children}){
 
     function isInCart(itemId){        
         return itemId === undefined ? undefined : getFromCart(itemId) !== undefined
-
         //console.log('is item in cart ' + item);
 
     }
@@ -80,7 +87,8 @@ export function CartProvider({defaultValue = [], children}){
         cart.map(i=>{
             cantidad = cantidad + i.count;
         })
-
+        setAmountItems(cantidad)
+        //console.log('actualizo cantidad')
         return(cantidad)
 
     }
@@ -99,7 +107,7 @@ export function CartProvider({defaultValue = [], children}){
     }   
 
     return (
-            <CartContext.Provider value={{cart, addItem, cartLenght, cleanCart, getTotal}}>
+            <CartContext.Provider value={{cart, addItem, cartLenght, cleanCart, getTotal, removeItem}}>
                 {children}
             </CartContext.Provider>
         )

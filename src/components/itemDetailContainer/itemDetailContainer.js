@@ -1,7 +1,9 @@
 import React, { useState, useEffect} from 'react';
 import {useParams, Link} from 'react-router-dom';
 import ItemDetail from '../itemDetail/itemDetail'
+import NotFound from '../general/notFound'
 import {getFirestore} from '../../firebase'
+
 
 
 function ItemDetailContainer() {
@@ -9,7 +11,7 @@ function ItemDetailContainer() {
     const { id } = useParams();
     const [product,setProduct] = useState(null);
     const [loading,setLoading] = useState(true);
-
+    
    // console.log(id);
    
    useEffect(() => {
@@ -22,10 +24,10 @@ function ItemDetailContainer() {
        if(!doc.exists){
             console.log('item not found')
         }
-
-        console.log('item found')
-
-        setProduct({...doc.data(), id:doc.id})
+        else{            
+            console.log('item found')
+            setProduct({...doc.data(), id:doc.id})
+        }
         
         }).catch((error)=>{
             console.log(error);
@@ -51,8 +53,8 @@ function ItemDetailContainer() {
                                 <Link to ={'/items'}> Volver al listado </Link>
                                 </div>
                         </div>
+                        {product? <ItemDetail product={product}></ItemDetail>:<NotFound/>}
                         
-                        <ItemDetail product={product}></ItemDetail>
                     </>
                 
            )} 
