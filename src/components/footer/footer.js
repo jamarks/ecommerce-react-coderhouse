@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 
 export default ()=>{
@@ -9,7 +10,7 @@ export default ()=>{
                 <div className='container'>
                     <div className='row'>
                         <div className='col-6'>
-                        Dev by <a target='_blank' href='https://twitter.com/javierwasserman'>jamarks</a> | Javier Wasserman<br/>
+                        Dev by <Link target='_blank' to={"//twitter.com/javierwasserman"}>jamarks</Link> | Javier Wasserman<br/>
                         Para CoderHouse, con amor
                         </div>
                         <div className='col'>

@@ -1,5 +1,5 @@
 // muestra el item
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import ItemCount from '../itemCount/itemCount';
 import {useCartContext} from '../../context/cartContext';
 
@@ -41,7 +41,7 @@ const ItemDetail = (product) => {
                         <p className='description'>{product.description}</p>
                     </div>
                     <div className="col col-md-5">
-                        <img src={product.imageId} className='img-fluid'></img>
+                        <img src={product.imageId} className='img-fluid' alt={product.title}></img>
                     </div>
                 </div>
         )

@@ -3,9 +3,6 @@ import ItemList from '../itemList/itemList'
 import {getFirestore} from '../../firebase'
 import {useParams} from 'react-router-dom'
 
-function Capitalize(str){
-    return str.charAt(0).toUpperCase() + str.slice(1);
-    }
 
 
 function ItemListCointainer(props) {
@@ -13,37 +10,35 @@ function ItemListCointainer(props) {
     const { categoryId } = useParams();
     const [products,setProducts] = useState([]);
     const [loading,setLoading] = useState(true);
-    const {error,title}= '';
+    const [error, setError] = useState(false)
+    
 
 
     useEffect(() => {
         if(categoryId){
-            //console.log(categoryId)
+            
             const db = getFirestore();
             const itemCollection = db.collection('items');
             const priceyItems = itemCollection.where('categoryId','==',categoryId);
-            const title = categoryId;
-            const error = '';
             
-
             priceyItems.get().then((querySnapshot)=>{
                 if(querySnapshot.size===0){
-                    const error = 'No hay resultados';
+                    setError(true);
                 }
                 setLoading(false);
                 setProducts(querySnapshot.docs.map(doc=>({...doc.data(), id:doc.id})))
             })
 
         }else{
-            console.log('Sin categoria');
+            
             const db = getFirestore();
             const itemCollection = db.collection('items');
             const priceyItems = itemCollection.where('stock','>',0);
-            const title = 'Todos los productos';
+            
             
             priceyItems.get().then((querySnapshot)=>{
                 if(querySnapshot.size===0){
-                    const error = 'No hay resultados';
+                    setError(true);
                 }
                 setLoading(false);
                 setProducts(querySnapshot.docs.map(doc=>({...doc.data(), id:doc.id})))
@@ -52,7 +47,7 @@ function ItemListCointainer(props) {
         }
         
         
-      }, []);
+      }, [categoryId]);
 
     return(
         
@@ -67,8 +62,8 @@ function ItemListCointainer(props) {
            ):(
                 <>
                     <h2 className="display-4 capitalize">{categoryId}</h2>
-                    {error!='' && <ItemList products={products}></ItemList>}
-                    {error=='' && <><h2 className="display-4 capitalize">No hay resultados</h2></>}
+                    {!error && <ItemList products={products}></ItemList>}
+                    {error && <><h2 className="display-4 capitalize">No hay resultados</h2></>}
                     
                 </>
            )} 

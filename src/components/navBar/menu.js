@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import {getFirestore} from '../../firebase'
+import React from 'react';
+//import {getFirestore} from '../../firebase'
 import {Link} from 'react-router-dom'
 function Menu(props){
 
@@ -29,7 +29,7 @@ function Menu(props){
         
         <ul className="navbar-nav">
                 <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a className="nav-link dropdown-toggle" href="/#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Categorias
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

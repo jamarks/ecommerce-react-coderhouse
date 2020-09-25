@@ -22,10 +22,9 @@ function ItemDetailContainer() {
     item.get().then((doc)=>{
         
        if(!doc.exists){
-            console.log('item not found')
+            
         }
-        else{            
-            console.log('item found')
+        else{                        
             setProduct({...doc.data(), id:doc.id})
         }
         
@@ -34,7 +33,7 @@ function ItemDetailContainer() {
         }).finally(()=>{
             setLoading(false);     
         })
-    }, []);
+    }, [id]);
     
     return(
         

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useState} from 'react'
 import {useCartContext} from '../../context/cartContext'
 
 import * as firebase from 'firebase/app';
@@ -24,7 +24,7 @@ export default ()=>{
 
     const validEmail = (value) =>{
         setConfirmEmail(value);
-        console.log('email:' + email + ' confirm:' + confirmEmail);
+        //console.log('email:' + email + ' confirm:' + confirmEmail);
         if(email && confirmEmail){
             if(email===value)
                 setEnableSubmit(true)
@@ -73,7 +73,7 @@ export default ()=>{
 
             try {            
                 const { id } = await orders.add(newOrder);
-                 console.log('id');
+                 //console.log('id');
                  setUserOrderId(id);
                 } 
             catch(err) {            // seteamos feedback para el user            
@@ -98,7 +98,11 @@ export default ()=>{
                         {   
                         cart.map(i => 
                             <div className='row marginTopSmall' key={i.product.id}>
-                                <div className='col col-md-3'><img src={i.product.imageId} className='img-fluid border-right border-bottom'></img></div>
+                                <div className='col col-md-3'>
+                                    <Link to ={'/item/' + i.product.id}>
+                                        <img src={i.product.imageId} className='img-fluid border-right border-bottom' alt={i.product.title}></img>
+                                    </Link>
+                                </div>
                                 <div className='col col-md-7'>
                                     <h3>Item <small className="text-muted">{i.product.title}</small></h3>
                                     <h6>Cantidad: <small className="text-muted">{i.count}</small></h6>

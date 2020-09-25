@@ -7,32 +7,22 @@ function ItemCount({options, onChange}) {
     const [cantidad, setCount] = useState(options.min);
 
     useEffect(()=>{
-          onChange(cantidad);
+        onChange(cantidad);
             return()=>{
         }
-      },[cantidad])
+      })
 
-      useEffect(()=>{
-            return()=>{
-        }
-
-      },[])
-
+      
     function dedact(min){
         if(cantidad>min){
             setCount(parseInt(cantidad)-1);
-            
-        }
-        else{}
+        }     
     }
     
     function sum(max){
-        
         if(cantidad<max){
             setCount(parseInt(cantidad)+1);
-        
-        }
-        else{}
+         }
     }
     
     return(

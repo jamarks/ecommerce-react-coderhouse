@@ -1,50 +1,35 @@
 import React, {useContext, useState, useEffect} from 'react';
-import { render } from '@testing-library/react';
 
 export const CartContext = React.createContext([]);
 export const useCartContext = () => useContext(CartContext);
 export function CartProvider({defaultValue = [], children}){
 
-    const [cart, setCart] = useState(defaultValue);
+    const [cart, setCart] = useState(
+        JSON.parse(localStorage.getItem('cart')) || defaultValue);
     
-    // el total de items no actualiza cuando inserto un producto que ya existe. Es raro.
-    const [amountItems,setAmountItems] = useState();
-
-
+    useEffect(() => {
+        localStorage.setItem('cart',  JSON.stringify(cart)); 
+      }, [cart]);
+ 
+      
     // TODO
-    // Validar q si es el mismo item, agregarla cantidad y no un nuevo item en productos
-    // Deberiamos ir teniendo el total actualizado cuando se agrega o se quita?
-    // poder quitar por id.
-    // usar un reduce para sumar el total
-        //return cart.reduce((prev, next) =>     (prev + (next.quantity * next.item.price)), 0)
+    // Mejorar el total: usar un reduce para sumar 
+    //return cart.reduce((prev, next) =>     (prev + (next.quantity * next.item.price)), 0)
     
-    useEffect(() => {
-        //console.log('Montaje de CartProvider');
-        setAmountItems(0)
-        return () => {
-            
-        }
-    }, [])
-
-    useEffect(() => {
-        //console.log(cart);      
-        return () => {
-            //
-        }
-    })
-
-
+    //useEffect(() => {
+    //    return () => {
+    //    }
+    //}, [])
 
     function addItem(item){
         // fijarse si existe, solo sumarle al quantity
-        if(!isInCart(item.product.id)){
-            //console.log('no existe')
+        if(!isInCart(item.product.id)){            
             const temp = [...cart, item];
             setCart(temp);
         }
         else{
             // aca hay q sumar
-            let cartTemporal = cart
+            let cartTemporal = [...cart]
 
             for (var i in cartTemporal) {
                 if (cartTemporal[i].product.id ===  item.product.id) {
@@ -53,12 +38,13 @@ export function CartProvider({defaultValue = [], children}){
                 }
               }
             setCart(cartTemporal);            
+        
         }
-        cartLenght()
+        
     }
 
     function removeItem(itemId){
-        let cartTemporal = cart
+        let cartTemporal = [...cart]
         
         for (var i in cartTemporal) {
             if (cartTemporal[i].product.id ===  itemId) {
@@ -67,8 +53,7 @@ export function CartProvider({defaultValue = [], children}){
             }
         }
 
-        setCart(cartTemporal);     
-        cartLenght();
+        setCart(cartTemporal);          
 
     }
 
@@ -78,25 +63,22 @@ export function CartProvider({defaultValue = [], children}){
 
     function isInCart(itemId){        
         return itemId === undefined ? undefined : getFromCart(itemId) !== undefined
-        //console.log('is item in cart ' + item);
 
     }
 
     function cartLenght(){
         let cantidad = 0;
-        cart.map(i=>{
+        cart.forEach(i=>{
             cantidad = cantidad + i.count;
         })
-        setAmountItems(cantidad)
-        //console.log('actualizo cantidad')
         return(cantidad)
 
     }
 
     function getTotal(){
         let total = 0;
-        console.log('getTotal')
-        cart.map(i=>{
+        //console.log('getTotal')
+        cart.forEach(i=>{
             total = total + (i.count*i.product.price);
         })
         return(Number((total).toFixed(2)))
@@ -104,6 +86,7 @@ export function CartProvider({defaultValue = [], children}){
     }
     function cleanCart(){
         setCart([]);    
+        
     }   
 
     return (
