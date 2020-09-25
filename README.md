@@ -12,7 +12,7 @@ Proyecto Final para el curso de React de [coderhouse.com](CoderHouse)
 
 ## Librerias adicionales
 
-### Lottie
+### `Lottie`
 [https://github.com/airbnb/lottie-web](https://github.com/airbnb/lottie-web).
 Para insersión de unos hermosos "gif animados" basados en un archivo JSON.
 
@@ -58,6 +58,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
   
 
 ### `yarn eject`
+
   
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
